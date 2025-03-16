@@ -1,0 +1,127 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap");
+
+:root {
+  --yellow: #d08700;
+  --primary-color: #062c30;
+  --secondary-color: #05595b;
+  --btn-color1: #e2d784;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: radial-gradient(farthest-side, #d08700 94%, #0000) top/6.4px 6.4px
+      no-repeat,
+    conic-gradient(#0000 30%, #d08700);
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 4px), #000 0);
+  animation: spinner-c7wet2 1s infinite linear;
+}
+
+@keyframes spinner-c7wet2 {
+  100% {
+    transform: rotate(1turn);
+  }
+}
+
+.spinner2 {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: radial-gradient(farthest-side, #05595b 94%, #0000) top/6.4px 6.4px
+      no-repeat,
+    conic-gradient(#0000 30%, #05595b);
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 4px), #000 0);
+  animation: spinner-c7wet2 1s infinite linear;
+}
+
+@keyframes spinner-c7wet2 {
+  100% {
+    transform: rotate(1turn);
+  }
+}
+
+/* dotted loader */
+
+.dots {
+  width: 56px;
+  height: 31.4px;
+  background: radial-gradient(farthest-side, #474bff 90%, #0000) 50% 0,
+    radial-gradient(farthest-side, #474bff 90%, #0000) 100% 0;
+  background-size: 13.4px 13.4px;
+  background-repeat: no-repeat;
+  position: relative;
+  animation: dots-pr30iymd 1.5s linear infinite;
+}
+
+.dots:before {
+  content: "";
+  position: absolute;
+  width: 9.4px;
+  height: 9.4px;
+  border-radius: 50%;
+  background: white;
+  left: 0;
+  top: 0;
+  animation: dots-q6bpf4md 0.5s linear infinite,
+    dots-b39z9imd 0.5s cubic-bezier(0, 200, 0.8, 200) infinite;
+}
+
+@keyframes dots-pr30iymd {
+  0%,
+  31% {
+    background-position: 50% 0, 100% 0;
+  }
+
+  33% {
+    background-position: 50% 100%, 100% 0;
+  }
+
+  43%,
+  64% {
+    background-position: 50% 0, 100% 0;
+  }
+
+  66% {
+    background-position: 50% 0, 100% 100%;
+  }
+
+  79% {
+    background-position: 50% 0, 100% 0;
+  }
+
+  100% {
+    transform: translateX(calc(-100% / 3));
+  }
+}
+
+@keyframes dots-q6bpf4md {
+  100% {
+    left: calc(100% + 7.8px);
+  }
+}
+
+@keyframes dots-b39z9imd {
+  100% {
+    top: -0.17px;
+  }
+}
+
+.main-loader {
+  width: 11.2px;
+  height: 11.2px;
+  border-radius: 11.2px;
+  box-shadow: 28px 0px 0 0 rgba(24, 96, 30, 0.2),
+    22.7px 16.5px 0 0 rgba(24, 96, 30, 0.4),
+    8.68px 26.6px 0 0 rgba(24, 96, 30, 0.6),
+    -8.68px 26.6px 0 0 rgba(24, 96, 30, 0.8), -22.7px 16.5px 0 0 #18601e;
+  animation: spinner-b87k6z 1s infinite linear;
+}
+
+@keyframes spinner-b87k6z {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
