@@ -25,7 +25,7 @@ function CodingQuestion() {
   const dispatch = useDispatch();
   const navigateTo = useNavigate();
 
-  const { loading, message, question, error, feedback } =
+  const { loading, message, question, isGenerated ,error, feedback } =
     useSelector((state) => state.coding);
   const { isAuthenticated } = useSelector((state) => state.auth);
 
@@ -69,7 +69,7 @@ function CodingQuestion() {
       toast.error(message);
       dispatch(clearAllCodingError());
     }
-  }, [message, error, loading, question, feedback]);
+  }, [message, error, loading, question,isGenerated, feedback]);
 
   return (
     <>
@@ -107,12 +107,13 @@ function CodingQuestion() {
               bgcolor={"--secondary-color"}
               hovercolor={"--yellow"}
               textcolor={"white"}
-              loading={isGenerated === 0 ? loading : false}
+              loading={ loading }
               spinner={"spinner"}
               handler={ getQuestonHandler }
             >
               Get Question
-            </BtnButton> : <div className="spinner"></div>
+            </BtnButton> : loading &&
+            <div className="spinner"></div>
             }
             {
               btnVisible===2 && 

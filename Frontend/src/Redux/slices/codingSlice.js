@@ -2,7 +2,7 @@ import {createSlice} from '@reduxjs/toolkit'
 import axios from 'axios'
 
 
-// const storeGenerated=sessionStorage.getItem('isGenerated') ? Number(sessionStorage.getItem("isGenerated")) : 0;
+const storeGenerated=sessionStorage.getItem('isGenerated') ? Number(sessionStorage.getItem("isGenerated")) : 0;
 const question=sessionStorage.getItem("question") ? JSON.parse( sessionStorage.getItem('question')) :"No Question Generated Yet.."
 // console.log(question)
 
@@ -14,6 +14,7 @@ const codingSlice=createSlice({
 		message:null,
 		allQuestion:null,
 		question:question,
+		isGenerated:storeGenerated,
 		feedback:null,
 		singleData:null
 	},
@@ -28,7 +29,7 @@ const codingSlice=createSlice({
 			state.question=action.payload.data.codeQuestion
 			state.isGenerated=1;
 
-			// sessionStorage.setItem('isGenerated',"1");
+			sessionStorage.setItem('isGenerated',"1");
 			sessionStorage.setItem('question',JSON.stringify(action.payload.data.codeQuestion));
 
 		   },
@@ -54,7 +55,7 @@ const codingSlice=createSlice({
 			state.loading=false;
 			state.message=action.payload
 			state.isGenerated=2;
-			// sessionStorage.setItem("isGenerated","2");
+			sessionStorage.setItem("isGenerated","2");
 
 		   },
 		   submitFailed:(state,action)=>{
@@ -77,7 +78,7 @@ const codingSlice=createSlice({
 			state.error=null;
 			state.feedback=action.payload?.data?.reviewFeedback;
 			state.isGenerated=0
-			// sessionStorage.setItem('isGenerated',"0")
+			sessionStorage.setItem('isGenerated',"0")
 		   },
 		   feedbackFailed:(state,action)=>{
 			state.loading=false;
