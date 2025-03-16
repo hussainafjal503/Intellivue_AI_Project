@@ -24,7 +24,7 @@ router.post('/delete-account',isAuthenticated,userController.sendAccountDeleteRe
 
 
 
-router.get('/get-user-detail',isAuthenticated,isAdmin,userController.getUserController);
+router.get('/get-user-detail',isAuthenticated,userController.getUserController);
 router.get('/getAll-user',isAuthenticated,isAdmin,userController.getAlluserController);
 
 

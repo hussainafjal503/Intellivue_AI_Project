@@ -19,7 +19,7 @@ function DeleteRequest() {
       toast.error(reduxError);
 	  dispatch(clearAllAdminError());
     }
-  }, [dispatch,allDeleteRequest]);
+  }, [dispatch]);
 
   const getUserDetailFunction = (id) => {
     const data = allDeleteRequest.filter((user) => user._id === id);
@@ -35,6 +35,8 @@ function DeleteRequest() {
 		dispatch(approveDeleteRequest(id))
   }
 
+
+ 
   return (
     <div className="w-full ">
       <AdminNav />
@@ -138,7 +140,7 @@ function DeleteRequest() {
                   bgcolor={"--yellow"}
                   hovercolor={"--secondary-color"}
                   textcolor={"white"}
-                  loading={loading}
+                  loading={loading }
                   spinner={"spinner2"}
                   handler={approveRequestHandler}
                 >
