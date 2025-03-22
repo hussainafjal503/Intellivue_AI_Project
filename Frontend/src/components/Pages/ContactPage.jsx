@@ -15,7 +15,7 @@ function ContactPage() {
   };
 
   const [formValue, setFormValue] = useState(obj);
-  const { loading, reduxError } = useSelector((state) => state.admin);
+  const { loading, reduxError,message } = useSelector((state) => state.admin);
 
   const inputHandler = (e) => {
     const { name, value } = e.target;
@@ -35,7 +35,8 @@ function ContactPage() {
   useEffect(() => {
     if (reduxError) {
       toast.warning(reduxError);
-    }else{
+    }else if(message){
+
 		toast.success("Message Sent..")
 	}
   }, [reduxError]);

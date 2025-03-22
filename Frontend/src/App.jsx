@@ -4,7 +4,7 @@ import "./App.css";
 import { useDispatch } from "react-redux";
 import { getUserRedux } from "./Redux/slices/authSlice";
 import { useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route,useLocation } from "react-router-dom";
 import Home from "./components/Pages/Home";
 import Login from "./components/Pages/Login";
 import Navbar from "./components/Pages/Navbar";
@@ -32,17 +32,22 @@ import ProtectedRouteAdmin from "./components/Auth/ProtectedRouteAdmin";
 import Dashborad from "./components/Admin/Dashborad";
 import UserMessage from "./components/Admin/UserMessage";
 import DeleteRequest from "./components/Admin/DeleteRequest";
+import NotFount from "./components/Pages/NotFount";
 
 function App() {
   const dispatch = useDispatch();
+  const location=useLocation();
 
   useEffect(() => {
     dispatch(getUserRedux());
   }, [dispatch]);
 
+  const validpath =['/',]
+
   return (
     <>
       <Navbar />
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
@@ -55,35 +60,19 @@ function App() {
         <Route element={<ProtectedRouteAdmin />}>
           <Route path="/admin-panel" element={<AdminMain />}>
             <Route index element={<Dashborad />} />
-            <Route path="user-message" element={<UserMessage/>}/>
-            <Route path="delete-request" element={<DeleteRequest/>}/>
-
-
+            <Route path="user-message" element={<UserMessage />} />
+            <Route path="delete-request" element={<DeleteRequest />} />
 
             <Route path="profile" element={<Profile />}>
               <Route index element={<PersonalDetails />} />
               <Route path="update-password" element={<UpdatePassword />} />
             </Route>
-
-
-
           </Route>
-
-        
-
         </Route>
 
-
-
-
-
         <Route element={<ProtectedRoute />}>
-
-         
-
           {/* profile section */}
 
-        
           <Route path="/profile" element={<Profile />}>
             <Route index element={<PersonalDetails />} />
             <Route path="update-password" element={<UpdatePassword />} />
@@ -111,8 +100,13 @@ function App() {
           <Route path="/roadmaps" element={<RoadMapHome />} />
           <Route path="/roadmaps/:id" element={<RoadMapData />} />
         </Route>
+      
+        <Route path="*" element={<NotFount />} />
       </Routes>
-      <Footer />
+      
+       <Footer />
+      
+      
     </>
   );
 }

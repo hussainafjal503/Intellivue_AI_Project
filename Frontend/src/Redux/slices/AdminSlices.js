@@ -10,7 +10,8 @@ const adminSlice=createSlice({
 		reduxError:null,
 		allMessage:null,
 		allData:null,
-		allDeleteRequest:null
+		allDeleteRequest:null,
+		message:null
 	},
 	reducers:{
 		whethearRequest(state,action){
@@ -77,9 +78,11 @@ const adminSlice=createSlice({
 		sendMessageRequest(state,action){
 			state.loading=true;
 			state.reduxError=null;
+			state.message=null;
 		},
 		sendMessageSuccess(state,action){
 			state.loading=false;
+			state.message=true
 			
 		},
 		sendMessageFailed(state,action){

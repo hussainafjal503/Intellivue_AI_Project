@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import Swal from "sweetalert";
 import {
   logout,
@@ -14,7 +14,8 @@ import { createAvatar } from "@dicebear/core";
 import { lorelei } from "@dicebear/collection";
 
 function Profile() {
-  const location=useLocation();
+ 
+
   const { user, message, error, isAuthenticated,imageLoading } = useSelector(
     (state) => state.auth
   );
@@ -68,7 +69,7 @@ function Profile() {
       toast.error(error);
       dispatch(clearAllError());
     }
-  }, [error, message, dispatch, isAuthenticated, user]);
+  }, [error, dispatch, isAuthenticated, user]);
 
   // console.log(user);
 
@@ -77,7 +78,7 @@ function Profile() {
   }
 
   return (
-    <div className={`${location.pathname==="/profile" ? "mt-20" : "mt-0"} max-w-screen z-20  h-auto mb-4`}>
+    <div className={`${user?.role==="user" ? "mt-20" : "mt-0"} max-w-screen z-20  h-auto mb-4`}>
       <div className="flex flex-col gap-2 px-6">
         <div className="flex flex-row gap-4 items-center  py-2">
           <div className="flex flex-col gap-2  ">
@@ -145,13 +146,13 @@ function Profile() {
         <div className="flex flex-col gap-2 ">
           <div className="shadow-md bg-gray-200 flex justify-center md:justify-around gap-4 items-center p-4 font-bold rounded-lg flex-wrap">
             <Link
-              to={location.pathname==="/profile"?"/profile" : "/admin-panel/profile"}
+              to={user?.role==="user"?"/profile" : "/admin-panel/profile"}
               className=" shadow-md  py-1 px-4 rounded-full hover:bg-[var(--secondary-color)] hover:text-white hover:scale-95 transition-all duration-300"
             >
               Personal Detail
             </Link>
             <Link
-              to={ location.pathname==="/profile/update-password" ?"/profile/update-password" : "/admin-panel/profile/update-password"}
+              to={ user?.role==="user" ?"/profile/update-password" : "/admin-panel/profile/update-password"}
               className="transition-all duration-200 shadow-md  py-1 px-4 rounded-full hover:bg-[var(--secondary-color)] hover:text-white hover:scale-95"
             >
               Update Password

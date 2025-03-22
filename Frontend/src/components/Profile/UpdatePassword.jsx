@@ -62,7 +62,7 @@ function UpdatePassword() {
       toast.error(error);
       dispatch(clearAllError());
     }
-  }, [dispatch, error, message, loading]);
+  }, []);
 
   return (
     <div className="w-full flex flex-col gap-4 px-6 pb-6">
