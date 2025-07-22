@@ -1,7 +1,7 @@
 const CodeReview = require("../models/codeReviewModels");
 const User = require("../models/UserModels");
 const fetchAiData = require("../config/AiFetchData");
-const AdminSchema=require("../models/AdminModel")
+const AdminSchema = require("../models/AdminModel");
 
 class CodeReviewService {
   createCodingService = async (userId) => {
@@ -39,23 +39,14 @@ class CodeReviewService {
         };
       }
 
-
-
       const adminData = await AdminSchema.findOne(); // Fetch the existing data
-        
-                if (adminData) {
-                    
-                    adminData.codingCount += 1;
-                    await adminData.save(); 
-                } else {
-                  
-                    await AdminSchema.create({ codingCount: 1 });
-                }
 
-
-
-
-
+      if (adminData) {
+        adminData.codingCount += 1;
+        await adminData.save();
+      } else {
+        await AdminSchema.create({ codingCount: 1 });
+      }
 
       return response;
     } catch (err) {
@@ -172,26 +163,25 @@ class CodeReviewService {
     }
   };
 
-  getCodeByIdService=async(params)=>{
-    try{
-      const {id}=params;
+  getCodeByIdService = async (params) => {
+    try {
+      const { id } = params;
       // console.log(id);
-      const response=await CodeReview.findById(id);
-      if(!response){
+      const response = await CodeReview.findById(id);
+      if (!response) {
         return {
-          success:false,
-          message:"unable to get coe",
-          statusCode:400
-        }
+          success: false,
+          message: "unable to get coe",
+          statusCode: 400,
+        };
       }
 
       return response;
-
-    }catch(err){
+    } catch (err) {
       console.log(`Error occured in get code by id service : ${err}`);
       throw err;
     }
-  }
+  };
 
   getAllReviewService = async (userId) => {
     try {
@@ -214,7 +204,6 @@ class CodeReviewService {
       throw err;
     }
   };
-  
 }
 
 module.exports = CodeReviewService;

@@ -1,7 +1,7 @@
 const User = require("../models/UserModels");
-const OTP=require('../models/Otp.models');
+const OTP = require("../models/Otp.models");
 const { response } = require("express");
-const AdminSchema=require('../models/AdminModel');
+const AdminSchema = require("../models/AdminModel");
 class UserRepository {
   registerRepository = async (data) => {
     try {
@@ -10,46 +10,34 @@ class UserRepository {
       if (alreadyExist) {
         return false;
       }
-      
-      const otpdb=await OTP.findOne({email});
+
+      const otpdb = await OTP.findOne({ email });
       // console.log(otpdb);
-      if(!otpdb){
+      if (!otpdb) {
         return {
-          statusCode:400,
-          message:"OTP not Verified.."
-        }
+          statusCode: 400,
+          message: "OTP not Verified..",
+        };
       }
       const response = await User.create(data);
 
-      otpdb.userId=response._id;
+      otpdb.userId = response._id;
       await otpdb.save();
       response.allOTP.push(otpdb._id);
       await response.save();
 
-      //updating the admin schema 
-
+      //updating the admin schema
 
       const adminData = await AdminSchema.findOne(); // Fetch the existing data
 
-        if (adminData) {
-            
-            adminData.totalUser += 1;
-            await adminData.save(); 
-        } else {
-          
-            await AdminSchema.create({ totalUser: 1 });
-        }
+      if (adminData) {
+        adminData.totalUser += 1;
+        await adminData.save();
+      } else {
+        await AdminSchema.create({ totalUser: 1 });
+      }
 
-
-
-
-
-
-
-
-
-    
-        response.password=undefined;
+      response.password = undefined;
       return response;
     } catch (err) {
       console.log(`error occured in Register Repository:  ${err}`);
@@ -70,7 +58,7 @@ class UserRepository {
       if (!isPasswordMatched) {
         return "invalid Creadentials";
       }
-      user.password=undefined;
+      user.password = undefined;
       return user;
     } catch (err) {
       console.log(`error occured in login Repository ${err}`);
@@ -103,7 +91,7 @@ class UserRepository {
       user.password = newPassword;
       const updatedUser = await user.save();
       // console.log(updatedUser);
-      updatedUser.password=undefined;
+      updatedUser.password = undefined;
       return updatedUser;
     } catch (err) {
       console.log(`Error occured in update Password Repository: ${err}`);
@@ -113,16 +101,12 @@ class UserRepository {
 
   updateProfileRepository = async (id, data) => {
     try {
-      const user = await User.findByIdAndUpdate(
-        id,
-       data,
-        { new: true }
-      );
+      const user = await User.findByIdAndUpdate(id, data, { new: true });
 
-      if(!user){
+      if (!user) {
         return false;
       }
-      user.password=undefined;
+      user.password = undefined;
       return user;
     } catch (err) {
       console.log(`Error Occured in updateProfileRepository : ${err}`);
@@ -130,43 +114,35 @@ class UserRepository {
     }
   };
 
-  updateAvtarRepository = async (id,data) => {
+  updateAvtarRepository = async (id, data) => {
     try {
-
-      const response=await User.findById(id);
-      if(!response){
+      const response = await User.findById(id);
+      if (!response) {
         return false;
       }
-      response.avtar=data;
-      const updateData=await response.save();
+      response.avtar = data;
+      const updateData = await response.save();
       // console.log("updatedData",updateData);
-      updateData.password=undefined;
+      updateData.password = undefined;
       return updateData;
-
-
     } catch (err) {
       console.log(`Error Occured in update Avtar Repository :${err}`);
-      throw `repository : ${err}`
+      throw `repository : ${err}`;
     }
   };
 
-  getAlluserRepository=async()=>{
-    try{
-
-      const data=await User.find();
-      if(!data){
+  getAlluserRepository = async () => {
+    try {
+      const data = await User.find();
+      if (!data) {
         return false;
       }
       return data;
-
-    }catch(err){
+    } catch (err) {
       console.log(`erro occured in get all user repository : ${err}`);
       throw err;
     }
-  }
-
-
-
+  };
 }
 
 module.exports = UserRepository;

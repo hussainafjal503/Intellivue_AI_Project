@@ -2,6 +2,7 @@ const Interview = require("../models/InterviewModels");
 const User = require("../models/UserModels");
 const Question = require("../models/QuestionModels");
 const fetchAiData = require("../config/AiFetchData");
+const AdminSchema=require('../models/AdminModel')
 
 class InterviewRepository {
   createInterviewRepository = async (id, data) => {
@@ -88,10 +89,17 @@ class InterviewRepository {
 
         
               const adminData = await AdminSchema.findOne(); // Fetch the existing data
+              // console.log(adminData)
         
                 if (adminData) {
                     
-                    adminData.interviewCount += 1;
+                  if(adminData.interviewCount>0){
+                      adminData.interviewCount += 1;
+                  }else{
+                    adminData.interviewCount=1;
+                  }
+                   
+                    // console.log(adminData)
                     await adminData.save(); 
                 } else {
                   

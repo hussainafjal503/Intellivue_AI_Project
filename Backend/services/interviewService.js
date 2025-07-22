@@ -2,6 +2,7 @@ const InterviewRepository = require("../repository/interviewRepository");
 const repositoryInterview = new InterviewRepository();
 const Interview = require("../models/InterviewModels");
 const fetchAiData = require("../config/AiFetchData");
+const AdminSchema =require('../models/AdminModel')
 
 class InterviewService {
   createInterviewService = async (id, data) => {
