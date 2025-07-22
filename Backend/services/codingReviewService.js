@@ -40,9 +40,16 @@ class CodeReviewService {
       }
 
       const adminData = await AdminSchema.findOne(); // Fetch the existing data
+      // console.log(adminData)
 
       if (adminData) {
-        adminData.codingCount += 1;
+      if(!adminData.codingCount){
+           adminData.codingCount =1;
+        }
+        else{
+
+          adminData.codingCount += 1;
+        }
         await adminData.save();
       } else {
         await AdminSchema.create({ codingCount: 1 });

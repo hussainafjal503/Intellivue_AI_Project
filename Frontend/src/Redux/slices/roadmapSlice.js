@@ -107,7 +107,7 @@ const roadmapSlice =createSlice({
 export const getRoadMapHandler=(goal)=>async(dispatch)=>{
 	dispatch(roadmapSlice.actions.getRoadmapRequest());
 	try{
-		const response=await axios.post('http://localhost:3000/api/v1/roadmap/create-goal',{goal},{
+		const response=await axios.post('/api/v1/roadmap/create-goal',{goal},{
 			withCredentials:true,
 			headers:{
 				"Content-Type":"application/json"
@@ -132,7 +132,7 @@ export const getRoadMapHandler=(goal)=>async(dispatch)=>{
 	const {_id}=data;
 	// console.log(_id)
 	try{
-		const response=await axios.get(`http://localhost:3000/api/v1/roadmap/get-roadmap/${_id}`,{
+		const response=await axios.get(`/api/v1/roadmap/get-roadmap/${_id}`,{
 			withCredentials:true
 		});
 		// console.log(response);
@@ -148,7 +148,7 @@ export const getRoadMapHandler=(goal)=>async(dispatch)=>{
 
 export const getAllResponses=()=>async(dispatch)=>{
 	try{
-		const response=await axios.get('http://localhost:3000/api/v1/roadmap/get-all-response',{
+		const response=await axios.get('/api/v1/roadmap/get-all-response',{
 			withCredentials:true
 		});
 		// console.log(response);
@@ -166,7 +166,7 @@ export const singleDetails=(id)=>async(dispatch)=>{
 	// console.log(id)
 	dispatch(roadmapSlice.actions.singleDetailRequest());
 	try{
-		const response=await axios.get(`http://localhost:3000/api/v1/roadmap/get-detailById/${id}`,{
+		const response=await axios.get(`/api/v1/roadmap/get-detailById/${id}`,{
 			withCredentials:true
 		});
 		// console.log(response)
@@ -185,7 +185,7 @@ export const singleDetails=(id)=>async(dispatch)=>{
 export const deleteRoadmap=(id)=>async(dispatch)=>{
 	dispatch(roadmapSlice.actions.deleteRequest());
 	try{
-		const response=await axios.delete(`http://localhost:3000/api/v1/roadmap/delete-roadmap/${id}`,{
+		const response=await axios.delete(`/api/v1/roadmap/delete-roadmap/${id}`,{
 			withCredentials:true
 		});
 		// console.log(response);

@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-
 const resumeSlice = createSlice({
   name: "resume",
   initialState: {
@@ -49,7 +48,7 @@ export const getResponseRedux = (prompt) => async (dispatch) => {
   dispatch(resumeSlice.actions.getAiResponseRequest());
   try {
     const response = await axios.post(
-      "http://localhost:3000/api/v1/resume/search-keyword",
+      "/api/v1/resume/search-keyword",
       { prompt },
       {
         withCredentials: true,
