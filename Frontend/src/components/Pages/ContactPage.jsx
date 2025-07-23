@@ -114,7 +114,7 @@ function ContactPage() {
       <div className="bg-gray-200 px-8 md:px-44 mt-10 py-8 flex flex-col md:flex-row gap-6  justify-around w-full ">
         <div className="space-y-4  w-[350px] p-0 m-0">
           <p>Contact Info</p>
-          <h4 className="font-bold text-4xl ">
+          <h4 className="font-bold md:text-4xl text-2xl break-words">
             We are always happy to assist you.
           </h4>
         </div>
