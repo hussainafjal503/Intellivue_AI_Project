@@ -57,7 +57,7 @@ function ContactPage() {
             action=""
             className="flex flex-col gap-6 w-full text-xs md:text-lg"
           >
-            <div className="flex flex-row gap-3 md:gap-8 w-full">
+            <div className="flex flex-col md:flex-row gap-3 md:gap-8 w-full">
               <input
                 type="text"
                 placeholder="Your Name"
