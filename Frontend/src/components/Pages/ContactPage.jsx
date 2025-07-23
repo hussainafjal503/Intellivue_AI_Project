@@ -43,7 +43,7 @@ function ContactPage() {
 
   return (
     <div className="pt-20">
-      <div className="px-4 md:px-16 w-full">
+      <div className="px-4 md:px-16 max-w-full">
         <div className="space-y-4">
           <p>Get Started</p>
           <div className="font-bold text-4xl md:text-6xl">
@@ -112,7 +112,7 @@ function ContactPage() {
       </div>
 
       <div className="bg-gray-200 px-8 md:px-44 mt-10 py-8 flex flex-col md:flex-row gap-6  justify-around w-full ">
-        <div className="space-y-4  w-[350px] p-0 m-0">
+        <div className="space-y-4 w-full md:w-[350px] p-0 m-0">
           <p>Contact Info</p>
           <h4 className="font-bold md:text-4xl text-2xl break-words">
             We are always happy to assist you.
