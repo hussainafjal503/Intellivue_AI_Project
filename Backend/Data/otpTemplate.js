@@ -1,5 +1,4 @@
-
-const otpTemplate=(validotp)=>`
+const otpTemplate = (validotp) => `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -63,7 +62,7 @@ const otpTemplate=(validotp)=>`
 </head>
 <body>
     <div class="container">
-        <div class="logo"><h2 style="color: #3498db; font-weight: bold;">SkillVibe</h2></div>
+        <div class="logo"><h2 style="color: #3498db; font-weight: bold;">IntelliVue</h2></div>
         <h1>Verify Your Account</h1>
         <p>Use the OTP below to verify your email address. This code is valid for 5 minutes.</p>
         <div class="otp">${validotp}</div>
@@ -74,7 +73,6 @@ const otpTemplate=(validotp)=>`
     </div>
 </body>
 </html>
-`
+`;
 
-
-module.exports=otpTemplate;
+module.exports = otpTemplate;
