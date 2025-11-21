@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import baseUrl from "../constUrls";
 
 const storeGenerated = sessionStorage.getItem("isGenerated")
   ? Number(sessionStorage.getItem("isGenerated"))
@@ -142,7 +143,7 @@ const codingSlice = createSlice({
 export const generateQuestion = () => async (dispatch) => {
   try {
     dispatch(codingSlice.actions.genrateQuestionRequest());
-    const response = await axios.get("/api/v1/code/create-code", {
+    const response = await axios.get(`${baseUrl}/api/v1/code/create-code`, {
       withCredentials: true,
     });
     // console.log(response);
@@ -160,7 +161,7 @@ export const submitAnswer = (answer) => async (dispatch) => {
 
   try {
     const response = await axios.post(
-      "/api/v1/code/submit-code",
+      `${baseUrl}/api/v1/code/submit-code`,
       { answer },
       {
         withCredentials: true,
@@ -183,7 +184,7 @@ export const submitAnswer = (answer) => async (dispatch) => {
 export const getFeedback = () => async (dispatch, getState) => {
   dispatch(codingSlice.actions.feedbackRequest());
   try {
-    const response = await axios.get("/api/v1/code/get-codeReview", {
+    const response = await axios.get(`${baseUrl}/api/v1/code/get-codeReview`, {
       withCredentials: true,
     });
     dispatch(codingSlice.actions.feedbackSuccess(response?.data));
@@ -196,7 +197,7 @@ export const getFeedback = () => async (dispatch, getState) => {
 export const getAllQuestion = () => async (dispatch) => {
   dispatch(codingSlice.actions.getAllQuestionRequest());
   try {
-    const response = await axios.get("/api/v1/code/getAll-review", {
+    const response = await axios.get(`${baseUrl}/api/v1/code/getAll-review`, {
       withCredentials: true,
     });
     // console.log(response);
@@ -215,7 +216,7 @@ export const getAllQuestion = () => async (dispatch) => {
 export const getSingleQuestion = (data) => async (dispatch) => {
   dispatch(codingSlice.actions.getSingleQuestionRequest());
   try {
-    const response = await axios.get(`/api/v1/code/get-codebyId/${data}`, {
+    const response = await axios.get(`${baseUrl}/api/v1/code/get-codebyId/${data}`, {
       withCredentials: true,
     });
     // console.log(response);
@@ -234,7 +235,7 @@ export const getSingleQuestion = (data) => async (dispatch) => {
 export const deleteQuestion = (data) => async (dispatch) => {
   dispatch(codingSlice.actions.deleteRequest());
   try {
-    const response = await axios.delete(`/api/v1/code/delete-review/${data}`, {
+    const response = await axios.delete(`${baseUrl}/api/v1/code/delete-review/${data}`, {
       withCredentials: true,
     });
     console.log(response);

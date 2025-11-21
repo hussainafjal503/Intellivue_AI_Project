@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import baseUrl from "../constUrls";
 
 const storedData = localStorage.getItem("interviewData");
 
@@ -173,7 +174,7 @@ export const createInterviewTechnolgy = (technology) => async (dispatch) => {
   dispatch(interviewSlice.actions.createInterviewRequest());
   try {
     const response = await axios.post(
-      "/api/v1/interview/create-interview",
+      `${baseUrl}/api/v1/interview/create-interview`,
       { technology },
       {
         withCredentials: true,
@@ -198,7 +199,7 @@ export const createInterviewTechnolgy = (technology) => async (dispatch) => {
 export const getAllInterviewDetails = () => async (dispatch) => {
   dispatch(interviewSlice.actions.getallInterviewRequest());
   try {
-    const response = await axios.get("/api/v1/interview/getall-interview", {
+    const response = await axios.get(`${baseUrl}/api/v1/interview/getall-interview`, {
       withCredentials: true,
     });
     // console.log(response);
@@ -221,7 +222,7 @@ export const addNewQuestion = (id) => async (dispatch) => {
 
   try {
     const response = await axios.put(
-      `/api/v1/interview/${id}/add-question`,
+      `${baseUrl}/api/v1/interview/${id}/add-question`,
       {},
       {
         withCredentials: true,
@@ -246,7 +247,7 @@ export const submitAnswerRedux = (data) => async (dispatch) => {
   try {
     const { id, answer } = data;
     const response = await axios.put(
-      `/api/v1/interview/${id}/submit-answer`,
+      `${baseUrl}/api/v1/interview/${id}/submit-answer`,
       { answer },
       {
         withCredentials: true,
@@ -273,7 +274,7 @@ export const getInterviewById = (id) => async (dispatch) => {
   dispatch(interviewSlice.actions.getAllQuestionByIdRequest());
   try {
     const response = await axios.get(
-      `/api/v1/interview/getInterview-detail/${id}`,
+      `${baseUrl}/api/v1/interview/getInterview-detail/${id}`,
       {
         withCredentials: true,
       }
@@ -295,7 +296,7 @@ export const getFeedbackHandler = (id) => async (dispatch) => {
   dispatch(interviewSlice.actions.getFeedbackRequest());
   try {
     const response = await axios.put(
-      `/api/v1/interview/${id}/ai-feedback`,
+      `${baseUrl}/api/v1/interview/${id}/ai-feedback`,
       {},
       {
         withCredentials: true,
@@ -316,7 +317,7 @@ export const deleteRedux = (id) => async (dispatch) => {
   dispatch(interviewSlice.actions.deleteRequest());
   try {
     const response = await axios.delete(
-      `/api/v1/interview/delete-interview/${id}`,
+      `${baseUrl}/api/v1/interview/delete-interview/${id}`,
       {
         withCredentials: true,
       }

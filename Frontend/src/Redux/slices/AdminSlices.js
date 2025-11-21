@@ -1,6 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 import axios from 'axios'
 const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
+import baseUrl from '../constUrls'
 
 const adminSlice=createSlice({
 	name:"admin",
@@ -151,7 +152,7 @@ export const fetchWhethear=(data)=>async(dispatch)=>{
 export const getAllAdminData=()=>async(dispatch)=>{
 	dispatch(adminSlice.actions.getAllDataRequest());
 	try{
-		const response=await axios.get('/api/v1/admin/getData-admin',{
+		const response=await axios.get(`${baseUrl}/api/v1/admin/getData-admin`,{
 			withCredentials:true
 		});
 		// console.log(response);
@@ -169,7 +170,7 @@ export const getAllAdminData=()=>async(dispatch)=>{
 export const getAllMessageHandler=()=>async(dispatch)=>{
 	dispatch(adminSlice.actions.getMessageRequest());
 	try{
-		const response=await axios.get('/api/v1/admin/getMessage-admin',{
+		const response=await axios.get(`${baseUrl}/api/v1/admin/getMessage-admin`,{
 			withCredentials:true
 		});
 		// console.log(response);
@@ -186,7 +187,7 @@ export const getAllMessageHandler=()=>async(dispatch)=>{
 export const getDeleteDataHandler=()=>async(dispatch)=>{
 		dispatch(adminSlice.actions.getDeleteRequest());
 	try{
-		const response=await axios.get('/api/v1/admin/getDeleteRequest-admin',{
+		const response=await axios.get(`${baseUrl}/api/v1/admin/getDeleteRequest-admin`,{
 			withCredentials:true
 		});
 		// console.log(response);
@@ -204,7 +205,7 @@ export const sendMessgeHandler=(data)=>async(dispatch)=>{
 	dispatch(adminSlice.actions.sendMessageRequest());
 
 	try{
-		const response=await axios.post('/api/v1/admin/send-message',data,{
+		const response=await axios.post(`${baseUrl}/api/v1/admin/send-message`,data,{
 			withCredentials:true,
 			headers:{
 				"Content-Type":"application/json"
@@ -227,7 +228,7 @@ export const sendMessgeHandler=(data)=>async(dispatch)=>{
 export  const deleteMessageRedux=(id)=>async(dispatch)=>{
 	dispatch(adminSlice.actions.deleteMessageRequest());
 	try{
-		const response=await axios.delete(`/api/v1/admin/delete-message/${id}`,{
+		const response=await axios.delete(`${baseUrl}/api/v1/admin/delete-message/${id}`,{
 			withCredentials:true
 		});
 		console.log(response);
@@ -248,7 +249,7 @@ export const approveDeleteRequest=(id)=>async(dispatch)=>{
 	dispatch(adminSlice.actions.approveRequest());
 	
 	try{
-		const response=await axios.put(`/api/v1/admin/approve-request/${id}`,{},{
+		const response=await axios.put(`${baseUrl}/api/v1/admin/approve-request/${id}`,{},{
 			withCredentials:true,
 			headers:{
 				"Content-Type":"application/json"

@@ -48,7 +48,7 @@ export const getResponseRedux = (prompt) => async (dispatch) => {
   dispatch(resumeSlice.actions.getAiResponseRequest());
   try {
     const response = await axios.post(
-      "/api/v1/resume/search-keyword",
+      `${baseUrl}/api/v1/resume/search-keyword`,
       { prompt },
       {
         withCredentials: true,

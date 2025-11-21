@@ -11,6 +11,9 @@ import axios from "axios";
 // const storedAuthCheck = localStorage.getItem("isAuthenticated");
 // const storedAuth = storedAuthCheck && storedAuthCheck === "true" ? true : false;
 
+
+import baseUrl from '../constUrls'
+
 const authSlice = createSlice({
   name: "auth",
   initialState: {
@@ -258,7 +261,7 @@ export const otpSent = (data) => async (dispatch) => {
   dispatch(authSlice.actions.otpRequest());
   try {
     const response = await axios.post(
-      "/api/v1/user/otp-send",
+      `${baseUrl}/api/v1/user/otp-send`,
       { email },
       {
         withCredentials: true,
@@ -289,7 +292,7 @@ export const verifyOtp = (otp) => async (dispatch, getState) => {
   dispatch(authSlice.actions.otpVerifyRequest());
   try {
     const response = await axios.post(
-      "/api/v1/user/verify",
+      `${baseUrl}/api/v1/user/verify`,
       { email, otp },
       {
         withCredentials: true,
@@ -318,7 +321,7 @@ export const Register = () => async (dispatch, getState) => {
 
   dispatch(authSlice.actions.requestRegister());
   try {
-    const response = await axios.post("/api/v1/user/register", data, {
+    const response = await axios.post(`${baseUrl}/api/v1/user/register`, data, {
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",
@@ -341,7 +344,7 @@ export const Register = () => async (dispatch, getState) => {
 export const login = (data) => async (dispatch) => {
   dispatch(authSlice.actions.requestLogin());
   try {
-    const response = await axios.post("/api/v1/user/login", data, {
+    const response = await axios.post(`${baseUrl}/api/v1/user/login`, data, {
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",
@@ -362,7 +365,7 @@ export const login = (data) => async (dispatch) => {
 export const logout = () => async (dispatch) => {
   dispatch(authSlice.actions.logoutRequest());
   try {
-    const response = await axios.get("/api/v1/user/logout", {
+    const response = await axios.get(`${baseUrl}/api/v1/user/logout`, {
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",
@@ -381,7 +384,7 @@ export const logout = () => async (dispatch) => {
 export const updatePassword = (data) => async (dispatch) => {
   try {
     dispatch(authSlice.actions.updatePasswordRequest());
-    const response = await axios.post("/api/v1/user/update-password", data, {
+    const response = await axios.post(`${baseUrl}/api/v1/user/update-password`, data, {
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",
@@ -401,7 +404,7 @@ export const updatePassword = (data) => async (dispatch) => {
 export const profileUpdate = (data) => async (dispatch) => {
   try {
     dispatch(authSlice.actions.profileUpdateRequest());
-    const response = await axios.post("/api/v1/user/update-profile", data, {
+    const response = await axios.post(`${baseUrl}/api/v1/user/update-profile`, data, {
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",
@@ -425,7 +428,7 @@ export const profilePictureUpdate = (file) => async (dispatch) => {
     const formData = new FormData();
     formData.append("image", file);
     dispatch(authSlice.actions.updatePPRequest());
-    const response = await axios.post("/api/v1/user/pp-update", formData, {
+    const response = await axios.post(`${baseUrl}/api/v1/user/pp-update`, formData, {
       withCredentials: true,
       headers: {
         "Content-Type": "multipart/form-data",
@@ -444,7 +447,7 @@ export const profilePictureUpdate = (file) => async (dispatch) => {
 export const getUserRedux = () => async (dispatch) => {
   dispatch(authSlice.actions.getUserRequest());
   try {
-    const response = await axios.get("/api/v1/user/get-user-detail", {
+    const response = await axios.get(`${baseUrl}/api/v1/user/get-user-detail`, {
       withCredentials: true,
     });
     // console.log(response);
@@ -460,7 +463,7 @@ export const deleteAccountHandlerRedux = () => async (dispatch) => {
   dispatch(authSlice.actions.sentDeleteAccountRequest());
   try {
     const response = await axios.post(
-      "/api/v1/user/delete-account",
+      `${baseUrl}/api/v1/user/delete-account`,
       {},
       {
         withCredentials: true,
