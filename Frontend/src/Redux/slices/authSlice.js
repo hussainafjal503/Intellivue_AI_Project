@@ -11,8 +11,7 @@ import axios from "axios";
 // const storedAuthCheck = localStorage.getItem("isAuthenticated");
 // const storedAuth = storedAuthCheck && storedAuthCheck === "true" ? true : false;
 
-
-import baseUrl from '../constUrls'
+import baseUrl from "../constUrls";
 
 const authSlice = createSlice({
   name: "auth",
@@ -228,6 +227,7 @@ const authSlice = createSlice({
     },
     getUserFailed(state, action) {
       state.error = action.payload;
+      state.isAuthenticated = false;
     },
 
     sentDeleteAccountRequest(state, action) {
@@ -317,7 +317,7 @@ export const verifyOtp = (otp) => async (dispatch, getState) => {
 
 export const Register = () => async (dispatch, getState) => {
   const data = getState()?.auth?.tempUser;
-  // console.log(data);
+  console.log("tem user==>", data);
 
   dispatch(authSlice.actions.requestRegister());
   try {
@@ -384,12 +384,16 @@ export const logout = () => async (dispatch) => {
 export const updatePassword = (data) => async (dispatch) => {
   try {
     dispatch(authSlice.actions.updatePasswordRequest());
-    const response = await axios.post(`${baseUrl}/api/v1/user/update-password`, data, {
-      withCredentials: true,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await axios.post(
+      `${baseUrl}/api/v1/user/update-password`,
+      data,
+      {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     dispatch(authSlice.actions.updatePasswordSuccess(response?.data));
     dispatch(authSlice.actions.clearAllErrorRequest());
@@ -404,12 +408,16 @@ export const updatePassword = (data) => async (dispatch) => {
 export const profileUpdate = (data) => async (dispatch) => {
   try {
     dispatch(authSlice.actions.profileUpdateRequest());
-    const response = await axios.post(`${baseUrl}/api/v1/user/update-profile`, data, {
-      withCredentials: true,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await axios.post(
+      `${baseUrl}/api/v1/user/update-profile`,
+      data,
+      {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     // console.log(response);
     dispatch(authSlice.actions.profileUpdateSuccess(response?.data));
@@ -428,12 +436,16 @@ export const profilePictureUpdate = (file) => async (dispatch) => {
     const formData = new FormData();
     formData.append("image", file);
     dispatch(authSlice.actions.updatePPRequest());
-    const response = await axios.post(`${baseUrl}/api/v1/user/pp-update`, formData, {
-      withCredentials: true,
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    const response = await axios.post(
+      `${baseUrl}/api/v1/user/pp-update`,
+      formData,
+      {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
 
     // console.log(response);
     dispatch(authSlice.actions.updatePPSuccess(response?.data));

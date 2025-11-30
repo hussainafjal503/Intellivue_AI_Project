@@ -46,28 +46,35 @@ function OtpVerify() {
     dispatch(verifyOtp(submitOpt));
   };
 
+  console.log("OTP VERIFIED", otpVerified);
+
   const otpCallback = useCallback(otpSubmitHandler, [otp]);
 
-  const ContinueHandler = useCallback(() => {
-    dispatch(Register());
-  }, []);
+  const ContinueHandler = async () => {
+    try {
+      // console.log("heelo");
+      const res = dispatch(Register());
+      // console.log(res);
+
+      navigateTo("/");
+      // console.log("heelo");
+    } catch (err) {
+      console.error("Error occured in continue handler : ", err);
+    }
+  };
 
   useEffect(() => {
     if (otpVerified && message) {
       toast.success(message);
-    }
-    else if (isAuthenticated) {
-      navigateTo("/");
+    } else if (isAuthenticated) {
       toast.success(message);
-    }
-    else if (message){
+    } else if (message) {
       toast.warning(message);
     }
     if (error) {
       toast.error(error);
       dispatch(clearAllError());
     }
-    
   }, [loading, error, otpVerified, message, dispatch, isAuthenticated]);
 
   return (
@@ -82,53 +89,61 @@ function OtpVerify() {
           <img src={pin} alt="" className="w-[120px] md:w-[150px]" />
         </div>
         <div className="font-bold flex flex-col justify-center items-center gap-6">
-          <div className="text-2xl md:text-3xl flex flex-col gap-1 leading-5 ">
-            <span className="text-green-500">OTP </span>
-            <span className="pl-10">Verification</span>
-          </div>
-          <p className="text-center text-wrap">
-            Enter the OTP sent to your registered email <br />
-            <span>To verify your identity</span>
-          </p>
-          <form
-            action=""
-            className="flex flex-col gap-3 items-center"
-            onSubmit={otpSubmitHandler}
-          >
-            <div className="flex flex-row gap-2">
-              {inputRef?.map((ref, index) => (
-                <input
-                  key={index}
-                  type="text"
-                  ref={ref}
-                  maxLength={1}
-                  className={`text-black rounded-full w-10 h-10 border border-green-500 text-center text-lg outline-none ${
-                    isFocused == index ? "bg-green-600" : "bg-white text-black"
-                  }`}
-                  onFocus={() => setIsFocused(index)}
-                  onChange={(e) => handleChange(e, index)}
-                  onKeyDown={(e) => keyDownHandler(e, index)}
-                />
-              ))}
-            </div>
-            {otpVerified && (
-              <div className="flex justify-center">
-                <i className="ri-check-double-line text-green-500 text-2xl animate__animated animate__zoomIn"></i>
+          {!otpVerified ? (
+            <>
+              <div className="text-2xl md:text-3xl flex flex-col gap-1 leading-5 ">
+                <span className="text-green-500">OTP </span>
+                <span className="pl-10">Verification</span>
               </div>
-            )}
-            {!otpVerified && (
-              <BtnButton
-                bgcolor={"--secondary-color"}
-                hovercolor={"--yellow"}
-                textcolor={"white"}
-                loading={loading}
-                spinner={"spinner"}
-                handler={otpCallback}
+              <p className="text-center text-wrap">
+                Enter the OTP sent to your registered email <br />
+                <span>To verify your identity</span>
+              </p>
+              <form
+                action=""
+                className="flex flex-col gap-3 items-center"
+                onSubmit={otpSubmitHandler}
               >
-                Verify
-              </BtnButton>
-            )}
-          </form>
+                <div className="flex flex-row gap-2">
+                  {inputRef?.map((ref, index) => (
+                    <input
+                      key={index}
+                      type="text"
+                      ref={ref}
+                      maxLength={1}
+                      className={`text-black rounded-full w-10 h-10 border border-green-500 text-center text-lg outline-none ${
+                        isFocused == index
+                          ? "bg-green-600"
+                          : "bg-white text-black"
+                      }`}
+                      onFocus={() => setIsFocused(index)}
+                      onChange={(e) => handleChange(e, index)}
+                      onKeyDown={(e) => keyDownHandler(e, index)}
+                    />
+                  ))}
+                </div>
+                {otpVerified && (
+                  <div className="flex justify-center">
+                    <i className="ri-check-double-line text-green-500 text-2xl animate__animated animate__zoomIn"></i>
+                  </div>
+                )}
+                {!otpVerified && (
+                  <BtnButton
+                    bgcolor={"--secondary-color"}
+                    hovercolor={"--yellow"}
+                    textcolor={"white"}
+                    loading={loading}
+                    spinner={"spinner"}
+                    handler={otpCallback}
+                  >
+                    Verify
+                  </BtnButton>
+                )}
+              </form>
+            </>
+          ) : (
+            <h3>It's time to Explore.</h3>
+          )}
 
           <div className="-mt-2">
             {otpVerified && (

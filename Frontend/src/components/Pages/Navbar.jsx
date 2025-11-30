@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import { NavLink, useLocation } from "react-router-dom";
 
 function Navbar() {
-  const {  isAuthenticated } = useSelector((state) => state.auth);
-  
+  const { isAuthenticated } = useSelector((state) => state.auth);
+  console.log("nav bar", isAuthenticated);
+
   const menu = [
     {
       title: "Home",
@@ -34,7 +35,7 @@ function Navbar() {
     menu.splice(2, 1);
   }
   useEffect(() => {
-    // console.log(isAuthenticated );  
+    // console.log(isAuthenticated );
   }, [isAuthenticated]);
 
   return (
