@@ -53,7 +53,7 @@ class UserService {
 		}
 
 		const token=jwt.sign(option,process.env.JWT_SECRET,{
-			expiresIn:"1d"
+			expiresIn:"1h"
 		})
 		return {
 			user:response,
@@ -107,7 +107,7 @@ class UserService {
 
 
 		const token=jwt.sign(option, process.env.JWT_SECRET,{
-			expiresIn:"1d"
+			expiresIn:"1h"
 		})
 
 		return {
@@ -141,10 +141,12 @@ class UserService {
 			}
 
 		}
+
+		console.log("Error : request backend me aa gya hai", )
 		return response;
 
 	}catch(err){
-
+		console.log("ERror occured is userget user service:: ",err);
 	}
   }
 

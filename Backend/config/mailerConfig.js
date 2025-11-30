@@ -6,18 +6,16 @@ const config = nodemailer.createTransport({
   secure: false,
   auth: {
     user: "josefcartous1212@gmail.com",
-    pass: "ahob jofg ppfg fbod ",
+    pass: "ahob jofg ppfg fbod",
   },
   tls: {
     rejectUnauthorized: false,
   },
 });
 
-
-
 const sendMail = async (email, subj, data) => {
   const options = {
-    from: "josefcartous1212@gmail.com",
+    from: "OTP VERIFICATION",
     to: email,
     subject: subj,
     html: data,
